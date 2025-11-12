@@ -1,10 +1,11 @@
 # CO₂ Sensor Display (ESPHome)
 
 CO₂ monitor built on the back of a Waveshare ESP32-S3-LCD-1.28" (non-touch) board and using a Sensirion SCD41 sensor.  
-Built direclty inside of home assistant using ESPHome and displays real-time CO₂ levels on its circular LCD screen in a calm, intuitive way.
+Built direclty inside of home assistant using the ESPHome Add-on so that the screen displays real-time CO₂ levels on its circular LCD screen in a calm, intuitive way.
 
-<h4> I've purposefully not not added any referal purchase links into this git beacuse I just don't believe in Amazon or whoever else having one more data point on you when it comes to buying things.
-But if you found this helpful or got use out of it I'd your support is always appreciated and you can "buy me a coffee" below.
+## F**** Amazon
+<h4> I've purposefully not not added any referal purchase links into this git beacuse I just don't believe in Amazon or any other company having one more data point on you when it comes to buying things.</h4>
+But if you found this helpful or got use out of it in anyway, your support is always appreciated and you can "buy me a coffee" below.
   <br><br>
 <a href="https://www.buymeacoffee.com/gtwizzy">
   <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="200" />
