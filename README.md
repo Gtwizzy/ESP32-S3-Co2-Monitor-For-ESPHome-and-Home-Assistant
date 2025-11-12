@@ -64,17 +64,29 @@ Copy the provided **font files** into the `fonts` folder and all required **imag
 
 Alternatively you can alter the yaml name to match what you chose for device name of your ESP board 
 
-<br> 3. If you connect your board to the computer you intend to work on this project from and run the setup wizzard ESPHome will pick up all the board settings correctly. Otherwise step through this section manually and enter the matching information for the device you're using. Once the default information is flashed to the device click edit and you should see some information regarding your Home Assistant API key and OTA password. It's not imperative that you use these in your own device but the template code does allow for them and it's easier to just copy and paste these somewhere safe so that you can use them in the template later rather than having to got through the process of comissioning these from home assistant etc.
+### 3) ESPHome First install
 
-<br> 4. If you've chosen to go with the same waveshare board I did you can simply open the newly created device and replace all default code with code found in the template .yaml file provided 
+If you connected your board to the computer you intend to work on this project from and run the setup wizzard ESPHome will pick up all the board settings correctly. Otherwise step through this section manually and enter the matching information for the device you're using. Once the default information is flashed to the device click edit and you should see some information regarding your Home Assistant API key and OTA password. It's not imperative that you use these in your own device but the template code does allow for them and it's easier to just copy and paste these somewhere safe so that you can use them in the template later rather than having to got through the process of comissioning these from home assistant etc.
 
-<br> 5. Update the Wifi SSID with your own network information (if not using a secrets file). And add in the API key and OTA password you copied earlier and place them in the alloted areas.
+### 4) Copy and Paste template.yaml
 
-<br> 6. Confirm the `fonts` and `images` folders (and their files) are in the correct folders on your home assistant machine as shown above.  
+If you've chosen to go with the same waveshare board I did you can simply open the newly created device and replace all default code with code found in the template .yaml file provided 
 
-<br> 7. Click **Install** and choose **Plug into this computer** (or OTA if already flashed).  
+### 4a) Update the code
 
-<br> 8. When the device comes online, you can add it to Home Assistant through the ESPHome integration by inputing the ip address of the device as it appears on your network.
+Update the Wifi SSID with your own network information (if not using a secrets file). And add in the API key and OTA password you copied earlier and place them in the alloted areas if you're going to use them.
+
+### 4b) Double check your folders
+
+Confirm the `fonts` and `images` folders (and their files) are in the correct folders on your home assistant machine as shown above.  
+
+### 5) Run the your install
+
+Click **Install** and choose **Plug into this computer** (or OTA if already flashed).  
+
+### 6) Add the device to Home Assistant
+
+When the device comes online, you can add it to Home Assistant through the ESPHome integration by inputing the ip address of the device as it appears on your network.
 
 ---
 
