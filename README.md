@@ -3,7 +3,10 @@
 CO₂ monitor built on the back of a Waveshare ESP32-S3-LCD-1.28" (non-touch) board and using a Sensirion SCD41 sensor.  
 Built direclty inside of home assistant using the ESPHome Add-on so that the screen displays real-time CO₂ levels on its circular LCD screen in a calm, intuitive way.
 
-## F**** Amazon
+ <img src="device images/ScreenWakeanimation.gif" alt="Diagram" width="300" />
+
+
+## Firstly F*** Amazon and the Bezos it rode in on
 <h4> I've purposefully not not added any referal purchase links into this git beacuse I just don't believe in Amazon or any other company having one more data point on you when it comes to buying things.</h4>
 But if you found this helpful or got use out of it in anyway, your support is always appreciated and you can "buy me a coffee" below.
   <br><br>
@@ -25,14 +28,20 @@ For now it works ***close*** to the way I wanted and I'll address the other piec
 
 ---
 
-## Hardware Used - read what to search for if you want a 1:1 copy of my own version
+## Note to the 3D designers out there.
+
+I've not yet designed a housing for this setup. So if someone comes up with a cool way to package this (using my exact hardware setup) with a nice 3D print that houses everything in a really tidy way. I would be ***greatly*** apreciative of you if you're willing to share anything you come up with. Like my C++ skills my 3D design artistry is not what it used to be so I will probably be approaching the housing of this in a really "function over form" way. But being that I've gone to a reasonable effort to build an aesthetically pleaseing UI I would much prefer a clean "designer" feel for this as an end product. Thanks in advance to anyone who does reach out to provide something.
+
+---
+
+## Hardware Used - read what to search for if you want a 1:1 copy of my own version otherwise choose what suits you.
 
 | Component | Model / Link | What to search for |
 |------------|---------------|------------------|
-| Microcontroller + Display | https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28 | My version was supplied by an Australian company (Core Electronics) that offers it with a milled aluminum housing. But I'm sure there are plenty of other suppliers will be able to offer something similar in your region.|
-| CO₂ Sensor | https://www.adafruit.com/product/5190 | I specifically chose the Adafruit version shown here because it was already solderd to a breakout board that offered ease of wiring.|
+| Microcontroller + Display | https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28 | My version was supplied by an Australian company (Core Electronics) that offers it with a milled aluminum housing. But I'm sure there are plenty of other suppliers that will be able to offer something similar in your region.|
+| CO₂ Sensor | https://www.adafruit.com/product/5190 | I specifically chose the Adafruit version shown here because it was already solderd to a breakout board that offered ease of wiring. You can go with whatever suits your build. |
 | Cable | JST-SH (STEMMA QT / Qwiic) for I²C connection | I just chose the best fit I could from what was available to me in this sizing for the Adafruit board. It's in no way a requirement to wire your sensor the way I did | 
-| Power | USB-C 5 V | Nothing to search for, ease of power delivery to all components and ability to flash easily from my PC was the main reason for choosing this, nothing elese. |
+| Power | USB-C 5 V | Nothing to search for, ease of power delivery to all components and ability to flash easily from my PC was the main reason for choosing this, nothing elese. Power it in the way you want for your project |
 
 ⚠️ Important: This project is built for the **non-touch** version of the Waveshare ESP32-S3-LCD-1.28 listed in the wiki.  
 The touch variant uses a different pinout and will not work without modifying the YAML configuration to suit its specs. That said this board is running at almost 96% flash once this code is loaded so adding any touch functions might still *just* be feasible but you'd have to test for yourself to confirm.
@@ -42,10 +51,44 @@ The touch variant uses a different pinout and will not work without modifying th
 ## Sensor Connection to ESP32
 
 All of the documentation for this board and which pins need to be used to address the I2C controller in order to connect the SCD41 senor can be found on the wiki https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28 
-However like all hardware these things can be prone to update as the manufacturer itterates things over time so please confirm for yourself before wiring if the below setup is still valid before pushing forward.
+However like all hardware these things can be prone to update as the manufacturer itterates things over time (and this is a relatively new product on the market) so please confirm for yourself before wiring, if the below setup is still valid before pushing forward. I will not be held acountable for any blue smoke of death you encounter or component death if you haven't confirmed your own wiring.
 
+---
 
+<h3>The SCD41 with JST connector and dupont wiring connected</h3>
+<img src="device images/SCD41_JST-wiring.jpeg" alt="Diagram" width="300" />
 
+---
+<h3>The SCD41 connected to the waveshare ESP32 headers</h3>
+<img src="device images/SCD41-ESP32-S3 wiring.jpeg" alt="Diagram" width="300" />
+
+---
+
+## SCD41 Pin connection  (Home Assistant + ESPHome Add-on)
+
+<h3>The waveshare ESP32 pinout</h3>
+<img src="device images/ESP32-S3-LCD-1_24130d2ef9b.jpg" alt="Diagram" width="500" />
+
+As of the time of writing this the above diagram was the correct pinout for the waveshare board used in this build.
+If you're using the same Adafruit SCD41 with the breakout board that contains the JST connectors the witing for each wire colour is as shown in the table below.
+
+If you're choosing to solder to the board's solder terminals double check my wiring desciriptions against the manufacturer's specs but I believe there is no change to this pin to pin layout regardless of JST usage or not. But again DO NOT assume that I am correct. This was true as of the time of writing (and there's no real reason it ***should*** change) but I didn't wire in this way so it's always best to check for yourself.
+
+### SCD-41 → Waveshare ESP32-S3-LCD-1.28″ Pin Mapping
+
+| SCD-41 Wire | Function | ESP32-S3 Pin | Board Label | Header Pin | Notes |
+|:------------|:----------|:-------------|:-------------|:------------|:------|
+| 🔴 **Red**   | VIN (3.3 – 5 V) | — | **VSYS** | **H1-18** | Power from USB-C 5 V rail |
+| ⚫ **Black** | Ground | — | **GND** | **H1-20** | Common ground with MCU |
+| 🔵 **Blue**  | I²C SDA | **GPIO 6** | **IMU_SDA** | **H2-16** | I²C data line |
+| 🟡 **Yellow**| I²C SCL | **GPIO 7** | **IMU_SCL** | **H2-14** | I²C clock line |
+
+✅ **Summary**
+
+Red (VIN) → VSYS (H1-18)
+Black (GND) → GND (H1-20)
+Blue (SDA) → GPIO 6 (H2-16)
+Yellow (SCL) → GPIO 7 (H2-14)
 
 ---
 
@@ -83,13 +126,13 @@ If you connected your board to the computer you intend to work on this project f
 
 If you've chosen to go with the same waveshare board I did you can simply open the newly created device and replace all default code with code found in the template .yaml file provided 
 
-### 4a) Update the code
+> ### 4a) Update the code
 
-Update the Wifi SSID with your own network information (if not using a secrets file). And add in the API key and OTA password you copied earlier and place them in the alloted areas if you're going to use them.
+> Update the Wifi SSID with your own network information (if not using a secrets file). And add in the API key and OTA password you copied earlier and place them in the alloted areas if you're going to use them.
 
-### 4b) Double check your folders
+>### 4b) Double check your folders
 
-Confirm the `fonts` and `images` folders (and their files) are in the correct folders on your home assistant machine as shown above.  
+>Confirm the `fonts` and `images` folders (and their files) are in the correct folders on your home assistant machine as shown above.  
 
 ### 5) Run the your install
 
