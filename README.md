@@ -167,11 +167,14 @@ This keeps visuals expressive while dramatically reducing file size so the proje
 
 ## Folder Layout
 
+Below is where you can find each of the necessary files needed for the instructions above.
+
 CO2-Sensor-Display/  
-├── config/esphome/co2_sensor/  
-│   ├── Template.yaml  
+├── main/    
 │   ├── fonts/  
-│   ├── images/  
+│   ├── images/
+│   ├── device images/
+│   ├── Template.yaml
 │   └── README.md  
 
 ---
