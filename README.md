@@ -15,27 +15,37 @@ But if you found this helpful or got use out of it in anyway, your support is al
 
 <h2>⚠️ Huge Caveates ⚠️<h2></h2>
   
-This project started life with a plan to build a full firmware in C++ with data being pushed to HA via MQTT as that is where I felt my skills were in getting this working in the exact way I wanted with the clean interface and animations I wanted while being lean on system resources. However! After I was given a significant humbling at just how much by C coding skills have dropped off after too may years of not using them to their fullest, I pivoted this into being a ESPHome device build. 
+This project started life with a plan to build a full firmware in C++ with data being pushed to HA via MQTT as that is where I felt my skills were in getting this working in the exact way I wanted; with the clean interface and animations I wanted, whilst still being lean on system resources. However! After I was given a significant humbling at just how much by C coding skills have dropped off after too may years of not using them to their fullest, so I pivoted this into being a ESPHome device build. 
   
-The only reason I didn't go this way to begin with was I had grander visions for the UI and animations etc and ESPHome does not natively support a lot of the needs I had out of the box just yet (at least not within the flash constrains of this device). AND I was less assured of my ability to make my logic work in .yaml due to me just being less expereienced at coding in .yaml for this kind of project. SO, it was built in 36 hours (originally I gave myself a 4 day long weekend to get it working the way I wanted and burned the first 2.5 days fighting my loosing battle with C) So byt the time I pivoted to ESPHome I had significantly compromised my inital ideas AND I ***had*** to rely on AI to help me get the logic just right and functioning. So I am **CONFIDENT** there are inefficiencies in this code. And I am **CONFIDENT** it could probably have been written better.
+The only reason I didn't go this way to begin with was I had grander visions for the UI and animations etc and ESPHome does not natively support a lot of the needs I had out of the box (at least just yet anyway). AND I was less assured of my ability to make my preffered logic work in .yaml due to me just being less expereienced at coding in .yaml for this kind of project. SO, it was built in 36 hours (originally I gave myself a 4 day long weekend to get it working the way I wanted and burned the first 2.5 days fighting my loosing battle with C) So by the time I pivoted to ESPHome I had significantly compromised my inital ideas AND I ***had*** to rely on AI to help me code the logic just right and functioning. So I am **CONFIDENT** there are inefficiencies in this code. And I am **CONFIDENT** it could probably have been written better.
 
-But this was designed for personal use so I will work on it in moments of spare time to see if I can improve this foundation. But please do not expect this project to be maintained in ANY way, or for me to even be able to provide significant support because for some of this template logic I am still coming to grips with the actual layout of it myself. I am happy for you to fork and work on it for yourself and feedback your improvements to me I would in fact ***LOVE*** that. But I just don't have the time to maintain this ongoing or try to promise reliable updates.
+But this was designed for personal use so I will work on it in moments of spare time to see if I can improve this foundation. The reason for calling this out is to try and let you know not expect this project to be maintained in ANY way, or for me to even be able to provide significant support because for some of this template logic, (honestly) I am still coming to grips with the actual layout of it myself. I am happy for you to fork this project and work on it for yourself and feedback your improvements to me so that I can improve my own working version (I would in fact ***LOVE*** that). But I just don't have the time to maintain this in an ongoing way or try to promise reliable updates/support.
 
-For now it works the way I want and I'll address the other pieces I'm still working on, when I can.
+For now it works ***close*** to the way I wanted and I'll address the other pieces I'm still working on, when I can.
 
 ---
 
-## Hardware Used
+## Hardware Used - read what to search for if you want a 1:1 copy of my own version
 
-| Component | Model / Link |
-|------------|---------------|
-| Microcontroller + Display | https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28 |
-| CO₂ Sensor | https://www.adafruit.com/product/5190 |
-| Cable | JST-SH (STEMMA QT / Qwiic) for I²C connection |
-| Power | USB-C 5 V |
+| Component | Model / Link | What to search for |
+|------------|---------------|------------------|
+| Microcontroller + Display | https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28 | My version was supplied by an Australian company (Core Electronics) that offers it with a milled aluminum housing. But I'm sure there are plenty of other suppliers will be able to offer something similar in your region.|
+| CO₂ Sensor | https://www.adafruit.com/product/5190 | I specifically chose the Adafruit version shown here because it was already solderd to a breakout board that offered ease of wiring.|
+| Cable | JST-SH (STEMMA QT / Qwiic) for I²C connection | I just chose the best fit I could from what was available to me in this sizing for the Adafruit board. It's in no way a requirement to wire your sensor the way I did | 
+| Power | USB-C 5 V | Nothing to search for, ease of power delivery to all components and ability to flash easily from my PC was the main reason for choosing this, nothing elese. |
 
-⚠️ Important: This project is built for the **non-touch** version of the Waveshare ESP32-S3-LCD-1.28.  
-The touch variant uses a different pinout and will not work without modifying the YAML configuration.
+⚠️ Important: This project is built for the **non-touch** version of the Waveshare ESP32-S3-LCD-1.28 listed in the wiki.  
+The touch variant uses a different pinout and will not work without modifying the YAML configuration to suit its specs. That said this board is running at almost 96% flash once this code is loaded so adding any touch functions might still *just* be feasible but you'd have to test for yourself to confirm.
+
+---
+
+## Sensor Connection to ESP32
+
+All of the documentation for this board and which pins need to be used to address the I2C controller in order to connect the SCD41 senor can be found on the wiki https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28 
+However like all hardware these things can be prone to update as the manufacturer itterates things over time so please confirm for yourself before wiring if the below setup is still valid before pushing forward.
+
+
+
 
 ---
 
@@ -171,12 +181,13 @@ This keeps visuals expressive while dramatically reducing file size so the proje
 Below is where you can find each of the necessary files needed for the instructions above.
 
 CO2-Sensor-Display/  
-├── main/    
-│   ├── fonts/  
-│   ├── images/
-│   ├── device images/
-│   ├── Template.yaml
-│   └── README.md  
+<br>├── main/
+<br>│   ├── fonts/
+<br>│   ├── images/
+<br>│   ├── device images/
+<br>│   ├── Electronics images/
+<br>│   ├── Template.yaml
+<br>│   └── README.md  
 
 ---
 
