@@ -150,6 +150,18 @@ Although the SCD41 also reports **temperature** and **humidity**, those values a
 This display is designed for **CO₂ at a glance** from a moderate distance. Adding more on-screen data reduced instant readability.  
 Temperature and humidity are still published to Home Assistant as entities, so you can use them freely in dashboards and automations.
 
+<h3>Device UI mockup's that show final display look for each AQ threshold</h3>
+
+<p>
+  <img src="device images/soft and still.png" alt="Diagram" width="200" />
+  <img src="device images/UI example.jpeg" alt="Diagram" width="200" />
+</p>
+<br/>
+<p>
+  <img src="device images/time to refresh.png" alt="Diagram" width="200" />
+  <img src="device images/bring the outside in.png" alt="Diagram" width="200" />
+</p>
+
 ---
 
 ## Air Quality Threshold Model
